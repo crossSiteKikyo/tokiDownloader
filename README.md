@@ -42,6 +42,6 @@
 ```
 ## 질문
 ### 오류 또는 개선사항 문의 
-[issue](https://github.com/crossSiteKikyo/tokiDownloader/issues) 에 제보해주세요. 익명으로 제보하고싶다면 [블로그]() 에 댓글을 남겨주세요.
+[issue](https://github.com/crossSiteKikyo/tokiDownloader/issues) 에 제보해주세요. 익명으로 제보하고싶다면 [블로그](https://whitebearwow.blogspot.com/2024/08/tokidownloader.html) 에 댓글을 남겨주세요.
 ### 왜 스크립트로 만들었나요?
 axios, selenium, puppeteer로 시도해봤지만 cloudflare를 뚫지 못해 브라우저에서 직접 실행하는 방법으로 만들었습니다.
