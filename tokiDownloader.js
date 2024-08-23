@@ -7,17 +7,6 @@ function loadScript(src) {
         script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
     });
 }
-function urlToPromise(url) {
-    return new Promise(function(resolve, reject) {
-        JSZipUtils.getBinaryContent(url, function (err, data) {
-            if(err) {
-                reject(err);
-            } else {
-                resolve(data);
-            }
-        });
-    });
-}
 function sleep(num) {
     return new Promise(resolve=>{
         setTimeout(()=>resolve(), num);
@@ -90,6 +79,7 @@ async function tokiDownload(startIndex, lastIndex) {
         const waitIframeLoad = (url) => {
             return new Promise((resolve)=>{
                 iframe.addEventListener('load', () => resolve());
+                // iframe.addEventListener('DOMContentLoaded', () => resolve());
                 iframe.src = url;
             });
         };
@@ -150,11 +140,12 @@ async function tokiDownload(startIndex, lastIndex) {
                 let imgLists = iframeDocument.querySelectorAll('.view-padding div p:not([class]) > img');
                 if (imgLists.length === 0)
                     imgLists = iframeDocument.querySelectorAll('.view-padding div > img');
-                console.log(imgLists);
+                console.log(`이미지 ${imgLists.length}개 감지`);
                 let promiseList = [];
                 for (let j=0; j<imgLists.length; j++) {
                     // data-l44925d0f9f="src"같이 속성을 부여해놓고 스크롤 해야 src가 바뀌는 방식이다.
                     // src를 직접 가져오면 loading.gif를 가져온다.
+                    // protocolDomain으로 바꿈으로서 CORS 해결
                     let src = imgLists[j].outerHTML.match(/https[^"]+/)[0].replace(/https:\/\/[^/]+/, protocolDomain);
                     const extension = src.match(/\.[a-zA-Z]+$/)[0];
                     promiseList.push(fetchAndAddToZip(src, num, folderName, j, extension, imgLists.length));
@@ -176,12 +167,24 @@ async function tokiDownload(startIndex, lastIndex) {
         link.click();
         URL.revokeObjectURL(link.href);  // 메모리 해제
         link.remove();
+        console.log(`다운완료`);
     } catch (error) {
+        alert(`tokiDownload 오류발생 \n` + error);
         console.error(error);
     }
 }
 
-// 전체 다운하고싶은경우 tokiDownload()
-// 30회차부터 다운하고싶은경우 tokiDownload(30)
-// 30회차부터 60회차까지 다운하고싶은경우 tokiDownload(30, 60)
+/*
+전체 다운하고싶은경우 tokiDownload()
+30회차부터 다운하고싶은경우 tokiDownload(30)
+30회차부터 60회차까지 다운하고싶은경우 tokiDownload(30, 60)
+*/
 tokiDownload();
+
+/*
+현재 버전 0.0.1
+
+0.0.1
+24년 08월 23일
+초기 버전
+*/
