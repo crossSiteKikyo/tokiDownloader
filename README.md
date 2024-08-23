@@ -8,7 +8,7 @@
 4. New snippet으로 tokiDownloader 생성후 붙여넣기. Ctrl+s로 저장한다.
 ![1~4진행이미지](https://github.com/user-attachments/assets/2f044da0-d0ee-4a32-9f73-2080d4d536e4)
 5. 다운받을 목록 페이지에서 tokiDownload()함수 인자 설정후 Ctrl+s로 저장. <br>전체다운: tokiDownload(), 30회차부터 다운: tokiDownload(30), 30회차부터 60회차까지 다운: tokiDownload(30, 60)
-6. snippet 실행. 단축키: Ctrl+Enter
+6. snippet 실행. 단축키: Ctrl+Enter (snippet에 저장되었으므로 다회성 사용 가능)
 ![5to6](https://github.com/user-attachments/assets/ab5dfe4b-14f9-4aec-b845-66c2b052da15)
 7. 유용한 것 같다면 star 부탁드립니다!
 ## 폴더(디렉토리) 구조
