@@ -134,12 +134,15 @@ async function tokiDownload(startIndex, lastIndex) {
                 await sleep(1000);
                 const iframeDocument = iframe.contentWindow.document;
                 // 이미지 추출
-                // view-padding의 div의 class가 없는 p의 img.
-                // view-padding의 div의 img. 두가지 경우만 발견함.
-                // html_encoder_div는 있을 때도 있고 없을 때도 있다.
-                let imgLists = iframeDocument.querySelectorAll('.view-padding div p:not([class]) > img');
-                if (imgLists.length === 0)
-                    imgLists = iframeDocument.querySelectorAll('.view-padding div > img');
+                // view-padding의 div의 img.
+                let imgLists = iframeDocument.querySelectorAll('.view-padding div > img');
+                // 화면에 보이지 않는 이미지라면 리스트에서 iframe제거
+                for (let j=0; j<imgLists.length; ) {
+                    if (imgLists[j].checkVisibility() === false)
+                        imgLists.splice(j, 1);
+                    else
+                        j++;
+                }
                 console.log(`이미지 ${imgLists.length}개 감지`);
                 let promiseList = [];
                 for (let j=0; j<imgLists.length; j++) {
@@ -179,12 +182,16 @@ async function tokiDownload(startIndex, lastIndex) {
 30회차부터 다운하고싶은경우 tokiDownload(30)
 30회차부터 60회차까지 다운하고싶은경우 tokiDownload(30, 60)
 */
-tokiDownload();
+tokiDownload(1139);
 
 /*
-현재 버전 0.0.1
+현재 버전 0.0.2
 
-0.0.1
+v0.0.1
 24년 08월 23일
 초기 버전
+
+v0.0.2
+24년 08월 25일
+북토끼, 마나토끼 이미지 감지 일반화.
 */
