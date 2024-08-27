@@ -66,7 +66,7 @@ async function tokiDownload(startIndex, lastIndex) {
         }
         
         // 제목 가져오기 - 처음 제목과 마지막 제목을 제목에 넣는다.
-        // const contentName = document.querySelector('.view-title .row .col-sm-8 .view-content').innerText;
+        // const contentName = document.querySelector('.page-title .page-desc').innerText;
         const firstName = list[0].querySelector('a').innerHTML.replace(/<span[\s\S]*?\/span>/g, '').trim();
         const lastName = list.at(-1).querySelector('a').innerHTML.replace(/<span[\s\S]*?\/span>/g, '').trim();
         const rootFolder = `${site}  ${firstName} ~ ${lastName}`;
@@ -135,7 +135,7 @@ async function tokiDownload(startIndex, lastIndex) {
                 const iframeDocument = iframe.contentWindow.document;
                 // 이미지 추출
                 // view-padding의 div의 img.
-                let imgLists = iframeDocument.querySelectorAll('.view-padding div > img');
+                let imgLists = Array.from(iframeDocument.querySelectorAll('.view-padding div img'));
                 // 화면에 보이지 않는 이미지라면 리스트에서 iframe제거
                 for (let j=0; j<imgLists.length; ) {
                     if (imgLists[j].checkVisibility() === false)
