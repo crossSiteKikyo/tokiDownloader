@@ -1,6 +1,6 @@
-const { connect } = require("puppeteer-real-browser");
-const axios = require('axios').default;
-const fs = require('node:fs');
+import { connect } from "puppeteer-real-browser";
+import axios from 'axios';
+import fs from 'node:fs';
 
 let info = {
     url: '',
@@ -8,7 +8,7 @@ let info = {
     siteTitle: '북토끼',
     site: 'booktoki',
     startIndex: 0,
-    lastIndex: 9999,
+    lastIndex: 99999,
     contentTitle: '화산귀환'
 }
 
@@ -108,8 +108,9 @@ function saveImage(path, fileName, src) {
             });
         }).catch(function (error) {
             consoleRed(`download error: ${path}/${fileName}`);
-            console.log(error);
-            resolve();
+            console.log(`재시도합니다`);
+            //console.log(error);
+            return saveImage(path, fileName, src);
         })
     })
 }
@@ -119,7 +120,7 @@ async function main() {
         headless: false,
         args: [],
         customConfig: {},
-        turnstile: true, //captcha를 자동으로 풀것인지
+        turnstile: false, //captcha를 자동으로 풀것인지
         connectOption: { defaultViewport: null },
         disableXvfb: true, //화면을 볼것인지
         // proxy:{
@@ -170,8 +171,6 @@ async function main() {
         while (info.lastIndex < parseInt(link.at(-1).num)) {
             link.pop();
         }
-        console.log(link[0]);
-        console.log(link.at(-1));
         // 페이지 방문하기
         for (let i = 0; i < link.length; i++) {
             await Promise.all([page.goto(link[i].src), page.waitForNavigation()]);
@@ -190,10 +189,9 @@ async function main() {
                     }
                     return fileContent;
                 });
-                // 이미 있다면 저장하지 않음.
-
-                // 텍스트 저장
-                saveBook(`./북토끼/${info.contentTitle}`, `${link[i].num} ${link[i].fileName}`, fileContent);
+                // 텍스트 저장. 이미 있다면 저장하지 않음.
+                if (!fs.existsSync(`./북토끼/${info.contentTitle}/${link[i].num} ${link[i].fileName}`))
+                    saveBook(`./북토끼/${info.contentTitle}`, `${link[i].num} ${link[i].fileName}`, fileContent);
             }
             // 뉴토끼, 마나토끼
             else {

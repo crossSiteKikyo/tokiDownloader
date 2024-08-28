@@ -1,4 +1,4 @@
-뉴토끼 마나토끼 북토끼 다운로드 스크립트
+# 1. 뉴토끼 마나토끼 북토끼 다운로드 스크립트
 - 프로그램 설치 불필요
 - 정보수집 없음
 ## 사용법
@@ -10,7 +10,6 @@
 5. 다운받을 목록 페이지에서 tokiDownload()함수 인자 설정후 Ctrl+s로 저장. <br>전체다운: tokiDownload(), 30회차부터 다운: tokiDownload(30), 30회차부터 60회차까지 다운: tokiDownload(30, 60)
 6. snippet 실행. 단축키: Ctrl+Enter (snippet에 저장되었으므로 다회성 사용 가능)
 ![5to6](https://github.com/user-attachments/assets/ab5dfe4b-14f9-4aec-b845-66c2b052da15)
-7. 유용한 것 같다면 star 부탁드립니다!
 ## 폴더(디렉토리) 구조
 뉴토끼, 마나토끼
 ```
@@ -40,8 +39,65 @@
 ...
 └─ 1234 어떤소설-1234화.txt
 ```
+
+# 2. 뉴토끼 마나토끼 북토끼 다운로더
+## 준비물 
+Nodejs
+## 설치 방법
+```bash
+git clone https://github.com/crossSiteKikyo/tokiDownloader.git
+cd tokiDownloader
+npm install
+```
+## 명령어
+```bash
+node down -url "URL" [-start STARTINDEX] [-last LASTINDEX]
+```
+- -url은 필수 입력입니다. 반드시 큰따옴표 안에 넣어주세요.
+- -start는 옵션입니다. 받고싶은 회차 시작 번호를 입력하세요. 생략하면 처음부터 받습니다.
+- -last는 옵션입니다. 받고싶은 마지막 회차 번호를 입력하세요. 생략하면 마지막까지 받습니다.
+
+처음 명령어를 실행하면 cloudflare captcha가 뜰겁니다. 직접 체크박스를 체크해주세요.
+## 폴더(디렉토리) 구조
+```
+뉴토끼/
+├─ 웹툰이름1/
+│   ├─ 0001 어떤웹툰-1화/
+│   │   ├─ 0001 어떤웹툰-1화 image0000.jpg
+│   │   ├─ 0001 어떤웹툰-1화 image0001.jpg
+│   │   ...
+│   │   └─ 0001 어떤웹툰-1화 image0024.jpg
+│   └─ 0002 어떤웹툰-2화/
+│       ├─ 0002 어떤웹툰-2화 image0000.jpg
+│       ├─ 0002 어떤웹툰-2화 image0001.jpg
+│       ...
+│       └─ 0002 어떤웹툰-2화 image0020.jpg
+└─ 웹툰이름2/
+
+마나토끼/
+├─ 만화이름1/
+│   ├─ 0001 어떤만화-1화/
+│   │   ├─ 0001 어떤만화-1화 image0000.jpg
+│   │   ├─ 0001 어떤만화-1화 image0001.jpg
+│   │   ...
+│   │   └─ 0001 어떤만화-1화 image0015.jpg
+│   └─ 0002 어떤만화-2화/
+│       ├─ 0002 어떤만화-2화 image0000.jpg
+│       ├─ 0002 어떤만화-2화 image0001.jpg
+│       ...
+│       └─ 0002 어떤만화-2화 image0032.jpg
+└─ 만화이름2/
+
+북토끼/
+├─ 소설이름1/
+│   ├─ 0001 어떤소설-1화.txt
+│   ├─ 0001 어떤소설-2화.txt
+│   ...
+│   └─ 0002 어떤소설-20화.txt
+└─ 소설이름2/
+```
 ## 질문
 ### 오류 또는 개선사항 문의 
 [issue](https://github.com/crossSiteKikyo/tokiDownloader/issues) 에 제보해주세요. 익명으로 제보하고싶다면 [블로그](https://whitebearwow.blogspot.com/2024/08/tokidownloader.html) 에 댓글을 남겨주세요.
-### 왜 스크립트로 만들었나요?
-axios, selenium, puppeteer로 시도해봤지만 cloudflare를 뚫지 못해 브라우저에서 직접 실행하는 방법으로 만들었습니다.
+### cloudflare captcha 자동으로 체크해주실 수 없나요?
+현재 라이브러리를 사용해 자동 체크 기능을 사용할경우 이상한게 클릭되는 오류가 있습니다. 직접 클릭해주세요.
