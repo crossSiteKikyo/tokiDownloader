@@ -49,6 +49,7 @@ git clone https://github.com/crossSiteKikyo/tokiDownloader.git
 cd tokiDownloader
 npm install
 ```
+https://github.com/user-attachments/assets/b3879c59-3381-407b-a3a8-ad8bf8d84cbb
 ## 명령어
 ```bash
 node down -url "URL" [-start STARTINDEX] [-last LASTINDEX]
@@ -58,6 +59,9 @@ node down -url "URL" [-start STARTINDEX] [-last LASTINDEX]
 - -last는 옵션입니다. 받고싶은 마지막 회차 번호를 입력하세요. 생략하면 마지막까지 받습니다.
 
 처음 명령어를 실행하면 cloudflare captcha가 뜰겁니다. 직접 체크박스를 체크해주세요.
+
+https://github.com/user-attachments/assets/615133d6-d995-488d-98f1-7f3cbf8df887
+
 ## 폴더(디렉토리) 구조
 ```
 뉴토끼/
