@@ -190,8 +190,8 @@ async function main() {
                     return fileContent;
                 });
                 // 텍스트 저장. 이미 있다면 저장하지 않음.
-                if (!fs.existsSync(`./북토끼/${info.contentTitle}/${link[i].num} ${link[i].fileName}`))
-                    saveBook(`./북토끼/${info.contentTitle}`, `${link[i].num} ${link[i].fileName}`, fileContent);
+                if (!fs.existsSync(`./북토끼/${info.contentTitle}/${link[i].num} ${link[i].fileName}.txt`))
+                    saveBook(`./북토끼/${info.contentTitle}`, `${link[i].num} ${link[i].fileName}.txt`, fileContent);
             }
             // 뉴토끼, 마나토끼
             else {
